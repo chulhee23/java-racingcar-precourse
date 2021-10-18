@@ -14,12 +14,12 @@ public class InputView {
         this.scanner = scanner;
     }
 
-    public String setCars(String cars) {
+    public String setCars() {
         System.out.println(carInputQuestion);
         return this.scanner.nextLine();
     }
 
-    public String setGameRound(int gameRound) {
+    public String setGameRound() {
         System.out.println(carNumberInputQuestion);
         return this.scanner.nextLine();
     }
