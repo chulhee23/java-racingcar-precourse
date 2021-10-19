@@ -1,6 +1,8 @@
 package controller;
 
 import domain.Car;
+import domain.NameValidator;
+import domain.RoundValidator;
 import utils.RandomUtils;
 import view.InputView;
 import view.ResultView;
@@ -18,39 +20,41 @@ public class GameController {
         this.inputView = inputView;
     }
 
+    /***
+     * 게임 실행
+     */
     public void run(){
-        // 게임 실행
         List<Car> cars = makeCars();
         int gameRound = getGameRound();
 
         for(int i = 1; i <= gameRound; i++){
-            // 전진하는 조건은 0에서 9 사이에서 random 값을 구한 후 random 값이 4 이상일 경우 전진하고, 3 이하의 값이면 멈춘다.
-            System.out.println("gameRound = " + i);
-
-            for (Car car : cars) {
-                car.running();
-                // TODO result 보여주기
-            }
-
-            ResultView.showRoundResult(cars);
-
+            playRound(i);
         }
 
-        // TODO 최종 우승자 보여주기
         ResultView.showWinner(cars);
 
     }
 
+    /***
+     * 라운드 내 진행
+     * @param i 라운드 번호
+     */
+    private void playRound(int i){
+        ResultView.showRound(i);
+
+        for (Car car : cars) {
+            car.running();
+        }
+
+        ResultView.showRoundResult(cars);
+    }
+
     private int getGameRound() {
-        String gameRound = inputView.setGameRound();
-        // TODO int validation
-        return Integer.parseInt(gameRound);
+        return RoundValidator.validateRoundNumber(inputView.setGameRound());
     }
 
     private List<Car> makeCars(){
-        // TODO name validation
-        String userInputCars = inputView.setCars();
-        List<String> carNames = new ArrayList<>(Arrays.asList(userInputCars.split(",")));
+        List<String> carNames = NameValidator.validateCarsName((inputView.setCars()));
 
         for(String name : carNames){
             cars.add(new Car(name));

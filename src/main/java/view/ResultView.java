@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
+    public static void showRound(int idx){
+        System.out.println("gameRound = " + idx);
+    }
+
     public static void showRoundResult(List<Car> cars) {
 
         for (Car car : cars) {
