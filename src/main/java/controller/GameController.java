@@ -3,6 +3,7 @@ package controller;
 import domain.Car;
 import utils.RandomUtils;
 import view.InputView;
+import view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +29,15 @@ public class GameController {
 
             for (Car car : cars) {
                 car.running();
-
-                System.out.println("car = " + car);
+                // TODO result 보여주기
             }
+
+            ResultView.showRoundResult(cars);
+
         }
 
+        // TODO 최종 우승자 보여주기
+        ResultView.showWinner(cars);
 
     }
 

@@ -5,7 +5,9 @@ import utils.RandomUtils;
 public class Car {
     private final String name;
     private int position = 0;
-    private static final int MINIMUM_NUMBER_TO_MOVE = 4;
+    private final int MINIMUM_NUMBER_TO_MOVE = 4;
+    private final int LOWER = 1;
+    private final int UPPER = 9;
 
 
     public Car(String name) {
@@ -30,11 +32,13 @@ public class Car {
     }
 
     public void running(){
-        int randNum = RandomUtils.nextInt(1, 9);
+        int randNum = RandomUtils.nextInt(LOWER, UPPER);
         if (randNum >= MINIMUM_NUMBER_TO_MOVE) {
             this.position++;
         }
     }
+
+
 
     @Override
     public String toString() {
