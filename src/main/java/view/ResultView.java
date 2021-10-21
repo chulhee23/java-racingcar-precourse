@@ -1,6 +1,7 @@
 package view;
 
 import domain.Car;
+import domain.Cars;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,15 +15,14 @@ public class ResultView {
         System.out.println("gameRound = " + idx);
     }
 
-    public static void showRoundResult(List<Car> cars) {
+    public static void showRoundResult(Cars cars) {
 
-        for (Car car : cars) {
-            System.out.println(car.getName() + " : " +  "-".repeat(car.getPosition()));
-        }
+        cars.showEachCarStatus();
+
 
     }
 
-    public static void showWinner(List<Car> cars){
+    public static void showWinner(Cars cars){
 
         List<Car> winners = calculateWinners(cars);
 
@@ -32,17 +32,7 @@ public class ResultView {
 
     }
 
-    private static List<Car> calculateWinners(List<Car> cars){
-
-        List<Car> winners = new ArrayList<>();
-        int longestDistance = cars.stream().max(Comparator.comparing(car -> car.getPosition())).get().getPosition();
-
-        for (Car car : cars) {
-            if (car.getPosition() == longestDistance){
-                winners.add(car);
-            }
-        }
-
-        return winners;
+    private static List<Car> calculateWinners(Cars cars){
+        return cars.getWinners();
     }
 }
